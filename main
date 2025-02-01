@@ -1,0 +1,117 @@
+from tkinter import *
+from tkinter import messagebox
+
+v1 = Tk()
+
+# Global variables
+a = 0
+f = ''
+
+# Button functions
+def num(no):
+    i.insert(END, no)
+
+def add():
+    global a, f
+    a = int(i.get())
+    i.delete(0, END)
+    f = '+'
+
+def mul():
+    global a, f
+    a = int(i.get())
+    i.delete(0, END)
+    f = '×'
+
+def sub():
+    global a, f
+    a = int(i.get())
+    i.delete(0, END)
+    f = '-'
+
+def div():
+    global a, f
+    a = int(i.get())
+    i.delete(0, END)
+    f = '÷'
+
+def equal():
+    global a, f
+    b = int(i.get())
+    i.delete(0, END)
+    if f == '+':
+        i.insert(END, str(a + b))
+    elif f == '-':
+        i.insert(END, str(a - b))
+    elif f == '×':
+        i.insert(END, str(a * b))
+    elif f == '÷':
+        if b != 0:
+            i.insert(END, str(a // b))
+        else:
+            i.insert(END, "Error")
+
+def clear_letter():
+    current_text = i.get()
+    i.delete(len(current_text)- 1, END)
+
+def but_func():
+    # Create the buttons
+    b1 = Button(f1, text="1", command=lambda: num(1))
+    b2 = Button(f1, text="2", command=lambda: num(2))
+    b3 = Button(f1, text="3", command=lambda: num(3))
+    b4 = Button(f1, text="4", command=lambda: num(4))
+    b5 = Button(f1, text="5", command=lambda: num(5))
+    b6 = Button(f1, text="6", command=lambda: num(6))
+    b7 = Button(f1, text="7", command=lambda: num(7))
+    b8 = Button(f1, text="8", command=lambda: num(8))
+    b9 = Button(f1, text="9", command=lambda: num(9))
+    b0 = Button(f1, text="0", command=lambda: num(0))
+    bc = Button(f1, text="       clear          ", command=clear_letter)
+
+    be = Button(f1, text="=", command=equal)
+    ba = Button(f1, text="+", command=add)
+    bs = Button(f1, text="-", command=sub)
+    bm = Button(f1, text="×", command=mul)
+    bd = Button(f1, text="÷", command=div)
+
+    # Position the buttons in a grid
+    b1.grid(row=1, column=0)
+    b2.grid(row=1, column=1)
+    b3.grid(row=1, column=2)
+    b4.grid(row=2, column=0)
+    b5.grid(row=2, column=1)
+    b6.grid(row=2, column=2)
+    b7.grid(row=3, column=0)
+    b8.grid(row=3, column=1)
+    b9.grid(row=3, column=2)
+    b0.grid(row=4, column=0)
+    bc.grid(row=6, column=0, columnspan=3)
+
+    ba.grid(row=4, column=1)
+    bs.grid(row=4, column=2)
+    bm.grid(row=5, column=0)
+    bd.grid(row=5, column=1)
+    be.grid(row=5, column=2)
+    
+    a.config(text="start your process")
+
+# Front page
+a=Label(v1, text="Welcome", bg='green')
+a.grid(row=0, column=0)
+Button(v1, text="next", command=but_func).grid(row=0, column=1)
+
+f1 = LabelFrame(v1, text="calculator", padx=5,pady=5)
+f1.grid(row=1, column=0, columnspan=3, pady=10,padx=10)
+def confirm_toexit():
+ 	var=messagebox.askyesno("confirmation","do you want to exit?")
+ 	if var==1:
+ 		v1.destroy()
+
+i = Entry(v1, width=20)
+i.grid(row=2, column=0, columnspan=2)
+bex = Button(v1, text="              Exit               ",command=confirm_toexit)
+bex.grid(row=7, column=0,columnspan=3)
+i.insert(END, "《ENTER HERE》")
+
+v1.mainloop()
